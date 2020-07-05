@@ -31,7 +31,6 @@ var chars = 'ABあい🍅🐤!🌕'.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]
 var points = []
 for (var i = 0; i < chars.length; ++i) {
   points.push(chars[i].codePointAt(0))
-  points.push(162)
 }
 console.log('codePointAt() => ', points)
 </script>
