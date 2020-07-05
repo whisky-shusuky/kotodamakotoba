@@ -33,6 +33,12 @@ for (var i = 0; i < chars.length; ++i) {
   points.push(chars[i].codePointAt(0))
 }
 console.log('codePointAt() => ', points)
+var decodeResult = []
+for (var j = 0; j < points.length; ++j) {
+  decodeResult.push(String.fromCodePoint(points[j]))
+}
+console.log(decodeResult)
+console.log(decodeResult.join(''))
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
