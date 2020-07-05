@@ -2,6 +2,8 @@
   <div class="home">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
+    <input v-model="message" placeholder="edit me">
+    <p>Message is: {{ message }}</p>
   </div>
 </template>
 
@@ -10,7 +12,8 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      message: ''
     }
   }
 }
