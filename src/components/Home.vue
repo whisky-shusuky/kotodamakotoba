@@ -15,7 +15,7 @@ export default {
   }
 }
 
-// unicodeの位置が配列で出力される
+// unicodeの位置が配列で出力される(10進数)
 // https://note.kiriukun.com/entry/20180925-charcodeat-vs-codepointat
 // Array(8)
 // 0: 65
@@ -31,6 +31,7 @@ var chars = 'ABあい🍅🐤!🌕'.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]
 var points = []
 for (var i = 0; i < chars.length; ++i) {
   points.push(chars[i].codePointAt(0))
+  points.push(162)
 }
 console.log('codePointAt() => ', points)
 </script>
