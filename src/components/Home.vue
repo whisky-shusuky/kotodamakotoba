@@ -3,7 +3,8 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <input v-model="message" placeholder="edit me">
-    <p>Message is: {{ message }}</p>
+    <p>Message is: {{ this.unicodePoints }}</p>
+    <p>Message is: {{ this.decodedUnicodes }}</p>
   </div>
 </template>
 
@@ -14,6 +15,24 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       message: ''
+    }
+  },
+  computed: {
+    unicodePoints: function () {
+      var chars = this.message.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || []
+      var points = []
+      for (var i = 0; i < chars.length; ++i) {
+        points.push(chars[i].codePointAt(0))
+      }
+      console.log(points)
+      return points
+    },
+    decodedUnicodes: function () {
+      var result = []
+      for (var j = 0; j < this.unicodePoints.length; ++j) {
+        result.push(String.fromCodePoint(this.unicodePoints[j]))
+      }
+      return result.join('')
     }
   }
 }
