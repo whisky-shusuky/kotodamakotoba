@@ -5,6 +5,7 @@
     <input v-model="message" placeholder="edit me">
     <p>Message is: {{ this.unicodePoints }}</p>
     <p>Message is: {{ this.decodedUnicodes }}</p>
+    <a id="getLocal" href="#" v-on:click="downloadText()">ダウンロードしてね</a>
   </div>
 </template>
 
@@ -33,6 +34,25 @@ export default {
         result.push(String.fromCodePoint(this.unicodePoints[j]))
       }
       return result.join('')
+    }
+  },
+  methods: {
+    downloadText: function () {
+      var string = 'ダウンロードできたかな？'
+      var title = 'testfile.txt'
+      var blobType = 'text/plain'
+      var linkTagId = 'getLocal'
+      var linkTag = document.getElementById(linkTagId)
+      var linkTagAttr = ['href', 'download']
+      var stringObject = new Blob([string], { type: blobType })
+      var objectURL = window.URL.createObjectURL(stringObject)
+      var UA = window.navigator.userAgent.toLowerCase()
+      if (UA.indexOf('msie') !== -1 || UA.indexOf('trident') !== -1) {
+        window.navigator.msSaveOrOpenBlob(stringObject, title)
+      } else {
+        linkTag.setAttribute(linkTagAttr[0], objectURL)
+        linkTag.setAttribute(linkTagAttr[1], title)
+      }
     }
   }
 }
