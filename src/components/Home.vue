@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     downloadText: function () {
-      var string = 'ダウンロードできたかな？'
+      var string = this.constructBody()
       var title = 'testfile.txt'
       var blobType = 'text/plain'
       var linkTagId = 'getLocal'
@@ -53,6 +53,13 @@ export default {
         linkTag.setAttribute(linkTagAttr[0], objectURL)
         linkTag.setAttribute(linkTagAttr[1], title)
       }
+    },
+    constructBody: function () {
+      return `
+head
+  unicode points are ${this.unicodePoints}!
+last
+`
     }
   }
 }
