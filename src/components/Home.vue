@@ -14,11 +14,14 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      message: ''
+      msg: 'Welcome to Your Vue.js App'
     }
   },
   computed: {
+    message: {
+      get () { return this.$store.state.message },
+      set (val) { this.$store.commit('setMessage', val) }
+    },
     unicodePoints: function () {
       var chars = this.message.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || []
       var points = []
