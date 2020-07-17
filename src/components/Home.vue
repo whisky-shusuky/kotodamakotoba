@@ -3,15 +3,20 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <input v-model="message" placeholder="edit me">
-    <p>Message is: {{ this.unicodePoints }}</p>
-    <p>Message is: {{ this.decodedUnicodes }}</p>
-    <a id="getLocal" href="#" v-on:click="downloadText()">ダウンロードしてね</a>
+    <p>
+      <StandardShader></StandardShader>
+    </p>
   </div>
 </template>
 
 <script>
+import StandardShader from './StandardShader.vue'
+
 export default {
   name: 'Home',
+  components: {
+    StandardShader
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -21,48 +26,6 @@ export default {
     message: {
       get () { return this.$store.state.message },
       set (val) { this.$store.commit('setMessage', val) }
-    },
-    unicodePoints: function () {
-      var chars = this.message.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || []
-      var points = []
-      for (var i = 0; i < chars.length; ++i) {
-        points.push(chars[i].codePointAt(0))
-      }
-      console.log(points)
-      return points
-    },
-    decodedUnicodes: function () {
-      var result = []
-      for (var j = 0; j < this.unicodePoints.length; ++j) {
-        result.push(String.fromCodePoint(this.unicodePoints[j]))
-      }
-      return result.join('')
-    }
-  },
-  methods: {
-    downloadText: function () {
-      var string = this.constructBody()
-      var title = 'testfile.txt'
-      var blobType = 'text/plain'
-      var linkTagId = 'getLocal'
-      var linkTag = document.getElementById(linkTagId)
-      var linkTagAttr = ['href', 'download']
-      var stringObject = new Blob([string], { type: blobType })
-      var objectURL = window.URL.createObjectURL(stringObject)
-      var UA = window.navigator.userAgent.toLowerCase()
-      if (UA.indexOf('msie') !== -1 || UA.indexOf('trident') !== -1) {
-        window.navigator.msSaveOrOpenBlob(stringObject, title)
-      } else {
-        linkTag.setAttribute(linkTagAttr[0], objectURL)
-        linkTag.setAttribute(linkTagAttr[1], title)
-      }
-    },
-    constructBody: function () {
-      return `
-head
-  unicode points are ${this.unicodePoints}!
-last
-`
     }
   }
 }
