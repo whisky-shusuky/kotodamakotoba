@@ -83,7 +83,7 @@ Shader "Custom/TestSurfaceShader"
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
-        static int unicode_points[${this.unicodePoints.length}] = {${this.unicodePoints}};
+        static int array[${this.unicodePoints.length}] = {${this.unicodePoints}};
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
