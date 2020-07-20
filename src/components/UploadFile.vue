@@ -28,7 +28,20 @@ export default {
       const reader = new FileReader()
       reader.onload = event => {
         this.preview = event.target.result
-        console.log(reader.result)
+
+        var lines = reader.result.split('\n')
+        var numLines = lines.length
+        var i
+        var unicodePoints = ''
+        var pattern = /unicode_points/
+        for (i = 0; i < numLines; i++) {
+          var line = lines[i]
+          if (line.match(pattern)) {
+            console.log(20)
+            unicodePoints = line
+          }
+        }
+        console.log(unicodePoints)
       }
       reader.readAsText(file)
       this.name = files[0].name
