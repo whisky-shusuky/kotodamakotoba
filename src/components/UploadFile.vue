@@ -5,7 +5,7 @@
     <input id="upload_image" type="file" name="img" @change="uploadFile($event)" style="display:none;" accept="image/*">
     </label>
     <p>またはここにファイルをドラッグ＆ドロップ</p>
-    <p v-show="preview"> {{name}} </p>
+    <p v-show="preview"> {{givenMessage}} </p>
   </div>
 </template>
 
@@ -43,11 +43,18 @@ export default {
         }
         var unicodesPattern = /\{.+?\}/
         var unicodes = unicodePoints.match(unicodesPattern)
-        this.givenMessage = unicodes[0].replace(/\{|\}/g, '').split(',')
+        this.givenMessage = this.decodeUnicodes(unicodes[0].replace(/\{|\}/g, '').split(','))
       }
       reader.readAsText(file)
       this.name = files[0].name
       document.getElementById('upload_image').files = files
+    },
+    decodeUnicodes: function (unicodesPoints) {
+      var result = []
+      for (var j = 0; j < unicodesPoints.length; ++j) {
+        result.push(String.fromCodePoint(unicodesPoints[j]))
+      }
+      return result.join('')
     },
     changeStyle: function (event, flag) {
       if (flag === 'ok') {
