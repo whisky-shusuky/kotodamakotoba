@@ -15,6 +15,7 @@ export default {
     return {
       preview: '',
       name: '',
+      givenMessage: '',
       styleA: true,
       styleB: false
     }
@@ -31,17 +32,18 @@ export default {
 
         var lines = reader.result.split('\n')
         var numLines = lines.length
-        var i
         var unicodePoints = ''
-        var pattern = /unicode_points/
-        for (i = 0; i < numLines; i++) {
+        // TODO: むりやりパースしてシェーダーに書き込んだユニコード位置を抽出しているけどもうちょっときれいに書けそう。
+        var variablePattern = /unicode_points/
+        for (var i = 0; i < numLines; i++) {
           var line = lines[i]
-          if (line.match(pattern)) {
-            console.log(20)
+          if (line.match(variablePattern)) {
             unicodePoints = line
           }
         }
-        console.log(unicodePoints)
+        var unicodesPattern = /\{.+?\}/
+        var unicodes = unicodePoints.match(unicodesPattern)
+        this.givenMessage = unicodes[0].replace(/\{|\}/g, '').split(',')
       }
       reader.readAsText(file)
       this.name = files[0].name
