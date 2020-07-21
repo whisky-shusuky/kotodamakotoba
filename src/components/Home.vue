@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <p>
+      <rotate-box></rotate-box>
+    </p>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <input v-model="message" placeholder="edit me">
@@ -15,12 +18,14 @@
 <script>
 import StandardShader from './StandardShader.vue'
 import UploadFile from './UploadFile.vue'
+import RotateBox from './RotateBox.vue'
 
 export default {
   name: 'Home',
   components: {
     StandardShader,
-    UploadFile
+    UploadFile,
+    RotateBox
   },
   data () {
     return {
