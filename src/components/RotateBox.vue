@@ -147,6 +147,7 @@ void main( void ) {
 
       this.cube.rotation.x += 0.02
       this.cube.rotation.y += 0.02
+      this.material.uniforms.time.value += 0.05
 
       this.renderer.render(this.scene, this.camera)
     }
