@@ -3,8 +3,6 @@
     <p>
       <rotate-box></rotate-box>
     </p>
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
     <input v-model="message" placeholder="edit me">
     <p>
       <StandardShader></StandardShader>
@@ -26,11 +24,6 @@ export default {
     StandardShader,
     UploadFile,
     RotateBox
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
   },
   computed: {
     message: {
