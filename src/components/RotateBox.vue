@@ -23,6 +23,11 @@ uniform float time;
 float gTime = 0.;
 const float REPEAT = 5.0;
 
+const float totalUnicodePoints = 25000.0;
+const float rWeight = .1;
+const float gWeight = .5;
+const float bWeight = .8;
+
 // 回転行列
 mat2 rot(float a) {
   float c = cos(a), s = sin(a);
@@ -79,19 +84,20 @@ float map(vec3 pos, float time) {
   return box_set1;
 }
 
+float rand(float x){
+    return fract(sin(x) * 100000.0);
+}
 
 void main( void ) {
   vec2 p = (gl_FragCoord.xy * 2. - resolution.xy) / min(resolution.x, resolution.y);
-  vec3 ro = vec3(0., -0.2 ,time * 1.);
+  vec3 ro = vec3(60.,60., time * 0.5);
   vec3 ray = normalize(vec3(p, 1.5));
-  ray.xy = ray.xy * rot(sin(time * .03) * 5.);
-  ray.yz = ray.yz * rot(sin(time * .05) * .2);
   float t = 0.01;
   vec3 col = vec3(0.);
   float ac = 0.0;
 
 
-  for (int i = 0; i < 99; i++){
+  for (int i = 0; i < 50; i++){
     vec3 pos = ro + ray * t;
     pos = mod(pos-2., 4.) -2.;
     gTime = time -float(i) * 0.01;
@@ -105,10 +111,9 @@ void main( void ) {
   }
 
   col = vec3(ac * 0.02);
+  float randRes = rand(totalUnicodePoints);
 
-  col +=vec3(0.,0.2 * abs(sin(time)),0.5 + sin(time) * 0.2);
-
-
+  col +=vec3(randRes * rWeight ,randRes * gWeight,randRes * bWeight);
   gl_FragColor = vec4(col ,1.0);
 }
 `
