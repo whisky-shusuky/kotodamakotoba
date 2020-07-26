@@ -116,12 +116,14 @@ void main( void ) {
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { type: 'f', value: 0.0 },
-        resolution: { type: 'v2', value: new THREE.Vector2(512.0, 512.0) }
+        resolution: { type: 'v2', value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
       },
       fragmentShader: frag,
       transparent: true,
       depthWrite: true,
-      side: THREE.DoubleSide
+      clipping: true,
+      side: THREE.DoubleSide,
+      uniformsNeedUpdate: true
     })
     const cube = new THREE.Mesh(geometry, material)
     return { scene, renderer, camera, light, geometry, material, cube }
@@ -131,7 +133,9 @@ void main( void ) {
     // canvasを後付けで設定する方法あったら教えてほしいー
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
-      canvas: $canvas
+      canvas: $canvas,
+      alpha: true,
+      localClippingEnabled: true
     })
 
     this.camera.position.set(0, 0, 2)
@@ -144,11 +148,9 @@ void main( void ) {
   methods: {
     animate () {
       requestAnimationFrame(this.animate)
-
-      this.cube.rotation.x += 0.02
-      this.cube.rotation.y += 0.02
-      this.material.uniforms.time.value += 0.05
-
+      this.cube.rotation.x += 0.005
+      this.cube.rotation.y += 0.005
+      this.material.uniforms.time.value += 0.01
       this.renderer.render(this.scene, this.camera)
     }
   }
