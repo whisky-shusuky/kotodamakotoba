@@ -5,7 +5,7 @@
     </p>
     <input v-model="message" placeholder="edit me">
     <p>
-      <StandardShader></StandardShader>
+      <Octgrams></Octgrams>
     </p>
     <p>
       <UploadFile></UploadFile>
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import StandardShader from './StandardShader.vue'
+import Octgrams from './Octgrams.vue'
 import UploadFile from './UploadFile.vue'
 import RotateBox from './RotateBox.vue'
 
 export default {
   name: 'Home',
   components: {
-    StandardShader,
+    Octgrams,
     UploadFile,
     RotateBox
   },
