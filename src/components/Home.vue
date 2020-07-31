@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <p>
-      <rotate-box></rotate-box>
+      <rotate-box :key="rotateBoxResetKey"></rotate-box>
     </p>
     <input v-model="message" placeholder="edit me">
     <p>
@@ -20,6 +20,11 @@ import RotateBox from './RotateBox.vue'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      rotateBoxResetKey: 0
+    }
+  },
   components: {
     Octgrams,
     UploadFile,
@@ -42,6 +47,7 @@ export default {
         this.$store.commit('setRWeight', this.surplusTwoFiveFive(pointsTotal, 3, -3))
         this.$store.commit('setGWeight', this.surplusTwoFiveFive(pointsTotal, 4, -4))
         this.$store.commit('setBWeight', this.surplusTwoFiveFive(pointsTotal, 5, -5))
+        this.rotateBoxResetKey += 1
       }
     }
   },
