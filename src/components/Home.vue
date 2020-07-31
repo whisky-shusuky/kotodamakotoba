@@ -28,7 +28,26 @@ export default {
   computed: {
     message: {
       get () { return this.$store.state.message },
-      set (val) { this.$store.commit('setMessage', val) }
+      // TODO: 一緒にmessage以外もsetしているが密結合な感じがして不安
+      set (val) {
+        this.$store.commit('setMessage', val)
+        var chars = val.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || []
+        var points = []
+        var pointsTotal = 0
+        for (var i = 0; i < chars.length; ++i) {
+          points.push(chars[i].codePointAt(0))
+          pointsTotal += chars[i].codePointAt(0)
+        }
+        this.$store.commit('setUnicodePoints', points)
+        this.$store.commit('setRWeight', this.surplusTwoFiveFive(pointsTotal, 3, -3))
+        this.$store.commit('setGWeight', this.surplusTwoFiveFive(pointsTotal, 4, -4))
+        this.$store.commit('setBWeight', this.surplusTwoFiveFive(pointsTotal, 5, -5))
+      }
+    }
+  },
+  methods: {
+    surplusTwoFiveFive: function (number, minimumDigits, startIndex) {
+      return parseInt(number.toString().substr(startIndex)) % 255
     }
   }
 }

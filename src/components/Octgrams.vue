@@ -144,10 +144,9 @@ Shader "Custom/Octagrams" {
         // もしもそのままunicode位置を使いたくなったらこれを使う
         // int unicode_points[${this.unicodePoints.length}] = {${this.unicodePoints}};
         float time = _Time * 30;
-        float totalUnicodePoints = 250000.0;
-        float rWeight = 0.1;
-        float gWeight = 0.5;
-        float bWeight = 0.8;
+        float rWeight = ${this.$store.state.rWeight}.;
+        float gWeight = ${this.$store.state.gWeight}.;
+        float bWeight = ${this.$store.state.bWeight}.;
 
         fixed2 resolution = _ScreenParams;
         fixed2 p = (i.uv*resolution * 2. - resolution.xy) / min(resolution.x, resolution.y);
@@ -168,9 +167,7 @@ Shader "Custom/Octagrams" {
           t += d*.55;
         }
         col = fixed3(ac * 0.02,ac * 0.02,ac * 0.02);
-        float randRes = rand(totalUnicodePoints);
-        col += fixed3(randRes * rWeight ,randRes * gWeight,randRes * bWeight);
-        //col += fixed3(0.,0.2 * abs(sin(time)),0.5 + sin(time) * 0.2);
+        col += fixed3(rWeight / 255. ,gWeight / 255.,bWeight / 255.);
         return fixed4(col, 1.0);
       }
       ENDCG
