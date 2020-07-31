@@ -24,9 +24,9 @@ float gTime = 0.;
 const float REPEAT = 5.0;
 
 const float totalUnicodePoints = 25000.0;
-const float rWeight = .1;
-const float gWeight = .5;
-const float bWeight = .8;
+const float rWeight = ${this.$store.state.rWeight}.;
+const float gWeight = ${this.$store.state.gWeight}.;
+const float bWeight = ${this.$store.state.bWeight}.;
 
 // 回転行列
 mat2 rot(float a) {
@@ -111,9 +111,7 @@ void main( void ) {
   }
 
   col = vec3(ac * 0.02);
-  float randRes = rand(totalUnicodePoints);
-
-  col +=vec3(randRes * rWeight ,randRes * gWeight,randRes * bWeight);
+  col +=vec3(rWeight / 255. ,gWeight / 255.,bWeight / 255.);
   gl_FragColor = vec4(col ,1.0);
 }
 `
