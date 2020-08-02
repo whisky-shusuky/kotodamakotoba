@@ -1,18 +1,15 @@
 <template>
   <div id="upload" class="form-group commonStyle" v-bind:class="{'styleA':styleA, 'styleB':styleB}" @dragover.prevent="changeStyle($event,'ok')" @dragleave.prevent="changeStyle($event,'no')" @drop.prevent="uploadFile($event)">
     <label for="upload_image" class="button">
-    <p>シェーダーをドラッグ＆ドロップしてメッセージを読み取ろう！</p>
+    <p>シェーダーをドラッグ＆ドロップしてこめられたメッセージを読み取ろう！</p>
     <input id="upload_image" type="file" name="img" @change="uploadFile($event)" style="display:none;" accept="image/*">
     </label>
     <div v-show="preview">
       <p>
-        このシェーダーに込められたメッセージは
+        このシェーダーに込められたメッセージはこちらです！
       </p>
       <p>
         {{this.$store.state.message}}
-      </p>
-      <p>
-        です！
       </p>
     </div>
   </div>

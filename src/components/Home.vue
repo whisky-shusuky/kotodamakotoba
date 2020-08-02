@@ -3,7 +3,7 @@
     <p>
       <rotate-box :key="this.$store.state.rotateBoxResetKey"></rotate-box>
     </p>
-    <input v-model="message" placeholder="edit me">
+    <input v-model="message" placeholder="いつもありがとう！">
     <p>
       <Octgrams></Octgrams>
     </p>
