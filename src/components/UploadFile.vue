@@ -1,11 +1,20 @@
 <template>
   <div id="upload" class="form-group commonStyle" v-bind:class="{'styleA':styleA, 'styleB':styleB}" @dragover.prevent="changeStyle($event,'ok')" @dragleave.prevent="changeStyle($event,'no')" @drop.prevent="uploadFile($event)">
     <label for="upload_image" class="button">
-    <p>ファイルを選択</p>
+    <p>シェーダーをドラッグ＆ドロップしてメッセージを読み取ろう！</p>
     <input id="upload_image" type="file" name="img" @change="uploadFile($event)" style="display:none;" accept="image/*">
     </label>
-    <p>またはここにファイルをドラッグ＆ドロップ</p>
-    <p v-show="preview"> {{givenMessage}} </p>
+    <div v-show="preview">
+      <p>
+        このシェーダーに込められたメッセージは
+      </p>
+      <p>
+        {{this.$store.state.message}}
+      </p>
+      <p>
+        です！
+      </p>
+    </div>
   </div>
 </template>
 
@@ -43,7 +52,7 @@ export default {
         }
         var unicodesPattern = /\{.+?\}/
         var unicodes = unicodePoints.match(unicodesPattern)
-        this.givenMessage = this.decodeUnicodes(unicodes[0].replace(/\{|\}/g, '').split(','))
+        this.$emit('setMessage', this.decodeUnicodes(unicodes[0].replace(/\{|\}/g, '').split(',')))
       }
       reader.readAsText(file)
       this.name = files[0].name

@@ -8,7 +8,7 @@
       <Octgrams></Octgrams>
     </p>
     <p>
-      <UploadFile></UploadFile>
+      <UploadFile @setMessage="setMessage"></UploadFile>
     </p>
   </div>
 </template>
@@ -49,6 +49,9 @@ export default {
   methods: {
     surplusTwoFiveFive: function (number, minimumDigits, startIndex) {
       return parseInt(number.toString().substr(startIndex)) % 255
+    },
+    setMessage: function (val) {
+      this.message = val
     }
   }
 }
