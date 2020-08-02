@@ -1,5 +1,5 @@
 <template>
-  <a id="getLocal" href="#" v-on:click="downloadText()">ダウンロードしてね</a>
+  <a id="getLocal" href="#" v-on:click="downloadText()">シェーダーをダウンロードしよう！</a>
 </template>
 
 <script>

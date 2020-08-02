@@ -8,7 +8,8 @@ const state = {
   unicodePoints: [],
   rWeight: 0,
   gWeight: 0,
-  bWeight: 0
+  bWeight: 0,
+  rotateBoxResetKey: 0
 }
 
 // TODO: 対象state名を文字列で渡して汎用的に更新できるほうにした方がいい？（よく分かっていない）
@@ -27,6 +28,9 @@ const mutations = {
   },
   setBWeight (state, val) {
     state.bWeight = val
+  },
+  incrementRotateBoxResetKey (state) {
+    state.rotateBoxResetKey += 1
   }
 }
 
