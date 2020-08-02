@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style scoped>
-  .commonStyle{ padding:30px; text-align:center; margin:30px; width:400px;}
+  .commonStyle{ padding:30px; text-align:center; margin:30px;}
   .styleA{border:3px dotted gray;}
   .styleB{border:3px dotted rgba(0,200,0,0.7);}
   .button{border:1px solid green; padding:3px; border-radius:5px; background-color:white;}
