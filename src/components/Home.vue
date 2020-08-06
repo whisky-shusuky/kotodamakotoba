@@ -10,6 +10,9 @@
     <p>
       <UploadFile @setMessage="setMessage"></UploadFile>
     </p>
+    <li>
+      <a class='twitter' :href="this.$store.state.twitterUrl" target ="_blank"><img src="../../src/assets/twitter.png"></a>
+    </li>
   </div>
 </template>
 
@@ -42,6 +45,7 @@ export default {
         this.$store.commit('setRWeight', this.surplusTwoFiveFive(pointsTotal, 3, -3))
         this.$store.commit('setGWeight', this.surplusTwoFiveFive(pointsTotal, 4, -4))
         this.$store.commit('setBWeight', this.surplusTwoFiveFive(pointsTotal, 5, -5))
+        this.$store.commit('setTwitterUrl', this.createTwitterUrl())
         this.$store.commit('incrementRotateBoxResetKey')
       }
     }
@@ -52,6 +56,9 @@ export default {
     },
     setMessage: function (val) {
       this.message = val
+    },
+    createTwitterUrl: function () {
+      return 'https://twitter.com/intent/tweet?text=test'
     }
   }
 }
@@ -73,5 +80,9 @@ li {
 }
 a {
   color: #42b983;
+}
+img.twitter {
+  width: 3em;
+  height: 3em;
 }
 </style>

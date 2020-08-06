@@ -9,6 +9,7 @@ const state = {
   rWeight: 0,
   gWeight: 0,
   bWeight: 0,
+  twitterUrl: '',
   rotateBoxResetKey: 0
 }
 
@@ -28,6 +29,9 @@ const mutations = {
   },
   setBWeight (state, val) {
     state.bWeight = val
+  },
+  setTwitterUrl (state, val) {
+    state.twitterUrl = val
   },
   incrementRotateBoxResetKey (state) {
     state.rotateBoxResetKey += 1
