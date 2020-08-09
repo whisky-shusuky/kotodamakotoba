@@ -58,7 +58,9 @@ export default {
       this.message = val
     },
     createTwitterUrl: function () {
-      return 'https://twitter.com/intent/tweet?text=test'
+      var url = encodeURIComponent('https://whisky-shusuky.github.io/kotodamakotoba/#/')
+      var txt = encodeURIComponent('KotodamaKotobaでメッセージに色を込めました！')
+      return 'https://twitter.com/intent/tweet?text=' + txt + '&url=' + url + '&hashtags=kotodamakotoba'
     }
   }
 }
