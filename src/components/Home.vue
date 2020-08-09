@@ -28,6 +28,11 @@ export default {
     UploadFile,
     RotateBox
   },
+  created () {
+    if (this.$route.query.message) {
+      this.message = this.$route.query.message
+    }
+  },
   computed: {
     message: {
       get () { return this.$store.state.message },
@@ -58,9 +63,9 @@ export default {
       this.message = val
     },
     createTwitterUrl: function () {
-      var url = encodeURIComponent('https://whisky-shusuky.github.io/kotodamakotoba/#/')
-      var txt = encodeURIComponent('KotodamaKotobaでメッセージに色を込めました！')
-      return 'https://twitter.com/intent/tweet?text=' + txt + '&url=' + url + '&hashtags=kotodamakotoba'
+      var url = encodeURIComponent('https://whisky-shusuky.github.io/kotodamakotoba/#/?message=' + encodeURIComponent(this.$store.state.message))
+      var txt = encodeURIComponent('KotodamaKotobaでシェーダーにメッセージを乗せました！')
+      return 'https://twitter.com/intent/tweet?text=' + txt + '&url=' + url + '&hashtags=KotodamaKotoba'
     }
   }
 }
