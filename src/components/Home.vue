@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>Kotodama Kotoba</h1>
     <p>
       <rotate-box :key="this.$store.state.rotateBoxResetKey"></rotate-box>
     </p>
@@ -64,7 +65,7 @@ export default {
     },
     createTwitterUrl: function () {
       var url = encodeURIComponent('https://whisky-shusuky.github.io/kotodamakotoba/#/?message=' + encodeURIComponent(this.$store.state.message))
-      var txt = encodeURIComponent('KotodamaKotobaでシェーダーにメッセージを乗せました！')
+      var txt = encodeURIComponent('KotodamaKotobaでシェーダーに「' + this.$store.state.message + '」のメッセージを乗せました！')
       return 'https://twitter.com/intent/tweet?text=' + txt + '&url=' + url + '&hashtags=KotodamaKotoba'
     }
   }
